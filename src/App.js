@@ -22,7 +22,7 @@ export default function App() {
   }, []);
 
   return <div className="App">
-    <h1>It's currently {weather.temp_f} in San Francisco.</h1>
+    <h1>It's currently {weather.temp_f + "°"} in San Francisco.</h1>
     <p>{message}</p>
   
   </div>;
