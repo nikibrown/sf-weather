@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 export default function App() {
   let [weather, setWeather] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   // this does not work??? const API_KEY = process.env.REACT_APP_WEATHERAPI;
   let message = '';
@@ -14,16 +15,23 @@ export default function App() {
   }
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(
       `https://api.weatherapi.com/v1/current.json?key=1f3e1456a5a2453ba82165140230705&q=San Francisco&aqi=no`
     )
       .then((response) => response.json())
       .then((data) => setWeather(data.current));
+
+      setIsLoading(false);
   }, []);
 
   return <div className="App">
-    <h1>It's currently {weather.temp_f + "°"} in San Francisco.</h1>
-    <p>{message}</p>
+
+    { isLoading ? 
+    <p>Loading...</p>
+  : <div><h1>It's currently {weather.temp_f + "°"} in San Francisco.</h1>
+  <p>{message}</p></div>}
+    
   
   </div>;
 }
