@@ -4,15 +4,19 @@ export default function App() {
   let [weather, setWeather] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  // I should probably store this in the .env file but couldn't get it to work. Might be a djmb stackblitz thing.
+  // I should probably store this in the .env file but couldn't get it to work. Might be a stackblitz thing.
   // const API_KEY = process.env.REACT_APP_WEATHERAPI;
-  let message = '';
+  let message = {};
   if (weather.temp_f < 60) {
-    message =
-      "🥶 It's a bit chilly, you might want to grab a beanie and patagonia vest.";
+    message = {
+      emoji: "🥶",
+      text: "It's a bit chilly, you might want to grab a beanie and patagonia vest."
+    }
   } else if (weather.temp_f > 60) {
-    message =
-      'Geez its warm time to head to the beach. You still might want to brab a beanie and a light jacket. ';
+    message = {
+      emoji: "🏖️",
+      text: "Geez its warm! Time to head to the beach. You still might want to brab a beanie and a light jacket."
+    }
   }
 
   const fetchWeather = async () => {
@@ -40,8 +44,9 @@ export default function App() {
         <p>Loading...</p>
       ) : (
         <div>
+          <h1 className="emoji">{message.emoji}</h1>
           <h1>It's currently {weather.temp_f + '°'} in San Francisco.</h1>
-          <p>{message}</p>
+          <p>{message.text}</p>
         </div>
       )}
     </div>

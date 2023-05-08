@@ -7,3 +7,7 @@ p {
 body {
   text-align: center;
 }
+
+.emoji {
+  font-size: 70px;
+}
